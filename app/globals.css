@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0c0e;
+  --foreground: #f2f3f5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Surfaces */
+  --color-surface: #111214;
+  --color-surface-2: #16171a;
+  --color-elevated: #191a1e;
+
+  /* Text */
+  --color-fg: #f2f3f5;
+  --color-muted: #a7acb3;
+  --color-faint: #8a9099;
+
+  /* Lines / borders */
+  --color-line: #232529;
+  --color-line-strong: #2e3035;
+
+  /* Accent — restrained brass */
+  --color-accent: #d8a45c;
+  --color-accent-strong: #eac089;
+  --color-accent-deep: #9c6b2e;
+  --color-accent-muted: rgba(216, 164, 92, 0.12);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* safety remaps for any leftover legacy accent utilities */
+  --color-cyan-50: #faf5ea;
+  --color-cyan-100: #f5ead6;
+  --color-cyan-200: #eed9ae;
+  --color-cyan-300: #e3c286;
+  --color-cyan-400: #d8a45c;
+  --color-cyan-500: #c08a3f;
+  --color-cyan-600: #9c6b2e;
+  --color-cyan-700: #7a5222;
+
+  /* slate → neutral warm ramp */
+  --color-slate-50: #f7f7f8;
+  --color-slate-100: #f1f2f4;
+  --color-slate-200: #e4e5e8;
+  --color-slate-300: #c9ccd1;
+  --color-slate-400: #a7acb3;
+  --color-slate-500: #868b92;
+  --color-slate-600: #666b72;
+  --color-slate-700: #45484d;
+  --color-slate-800: #2a2c30;
+  --color-slate-900: #18191c;
+  --color-slate-950: #0e0f11;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(216, 164, 92, 0.3);
+  color: #12100a;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0c0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2e3035, #232529);
+  border-radius: 8px;
+  border: 2px solid #0b0c0e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8a9099, #666b72);
+}
+
+/* ---------- Surfaces & decorative ---------- */
+
+.text-gradient {
+  background-image: linear-gradient(100deg, #eac089 0%, #d8a45c 48%, #b07c34 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-12px) translateX(6px);
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+.animate-dash-flow {
+  animation: dash-flow 30s linear infinite;
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2.6s ease-in-out infinite;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.7) 0%,
+    #ffffff 50%,
+    rgba(226, 232, 240, 0.7) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-dash-flow,
+  .animate-marquee,
+  .animate-pulse-dot,
+  .shimmer-text {
+    animation: none;
+  }
+}
